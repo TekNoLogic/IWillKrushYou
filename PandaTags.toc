@@ -1,0 +1,16 @@
+## Interface: 30000
+
+## Title: PandaTags
+## Notes: DE, prospecting and milling price estimates
+## Author: Tekkub Stoutwrithe
+## Version: Alpha
+## X-Website: http://code.google.com/p/tekkub-wow/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Tradeskills
+
+## OptionalDeps: tekDebug, tekErr
+
+LibStub.lua
+tekIDmemo.lua
+
+Milling.lua
