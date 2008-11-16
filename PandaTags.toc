@@ -17,3 +17,4 @@ LibStub.lua
 tekIDmemo.lua
 
 Milling.lua
+Disenchanting.lua
