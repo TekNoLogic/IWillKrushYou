@@ -18,3 +18,4 @@ tekIDmemo.lua
 
 Milling.lua
 Disenchanting.lua
+Jewelcrafting.lua
