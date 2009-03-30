@@ -1,4 +1,7 @@
 ﻿
+local de_values, de_means = PANDATAGS_DE_VALS, PANDATAGS_DE_VALS2
+PANDATAGS_DE_VALS, PANDATAGS_DE_VALS2 = nil
+
 local BC_GREEN_GEMS = {23077, 21929, 23112, 23079, 23117, 23107}
 local BC_BLUE_GEMS = {23436, 23439, 23440, 23437, 23438, 23441}
 local WRATH_GREEN_GEMS = {36917, 36929, 36920, 36932, 36923, 36926}
@@ -103,6 +106,15 @@ local OnTooltipSetItem = function(frame, ...)
 			elseif id == 36912 then val = (gemavg(WRATH_GREEN_GEMS) * 1.100 + gemavg(WRATH_BLUE_GEMS) * 0.195) * 4 end
 
 			if val and val ~= 0 then frame:AddDoubleLine("Average crush value:", GS(val/20).."|cffffffff/ea - "..GS(val).."|cffffffff/stk") end
+
+			if id == 36912 then
+				local blue_sum = gemavg(WRATH_BLUE_GEMS) * 0.195
+				local green_sum = (GetAuctionBuyout(36932) + GetAuctionBuyout(36926)) * 1.1/3
+				print(de_values[42336])
+				local x = de_values[42336]
+				local de_sum = 1.1*2/3 * (de_means[42336] - math.min(GetAuctionBuyout(37701)*2, GetAuctionBuyout(35624)/5))
+				frame:AddDoubleLine("Crush & DE value:", GS((blue_sum + green_sum + de_sum)/5).."|r/ea")
+			end
 		end
 	end
 	if origs[frame] then return origs[frame](frame, ...) end

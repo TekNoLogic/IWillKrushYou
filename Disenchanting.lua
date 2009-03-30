@@ -120,7 +120,7 @@ local function GS(cash)
 end
 
 
-local results, probs = {}, {}
+local results, probs, means = {}, {}, {}
 local values = setmetatable({}, {
 	__index = function(t, link)
 		if not link then return end
@@ -134,18 +134,19 @@ local values = setmetatable({}, {
 
 		local id1, qtytxt1, perctxt1, qty1, weight1, id2, qtytxt2, perctxt2, qty2, weight2, id3, _, _, qty3, weight3 = GetPossibleDisenchants(link)
 		local bo1, bo2, bo3 = id1 and GetAuctionBuyout(id1), id2 and GetAuctionBuyout(id2), id3 and GetAuctionBuyout(id3)
-		local mean = GS((id1 and bo1 and qty1*weight1*bo1 or 0)+ (id2 and bo2 and qty2*weight2*bo2 or 0) + (id3 and bo3 and qty3*weight3*bo3 or 0))
+		means[link] = (qty1*weight1*bo1 or 0) + (bo2 and qty2*weight2*bo2 or 0) + (bo3 and qty3*weight3*bo3 or 0)
 		local mode = GS(qty1*bo1)
 
 		if qual == 2 and itemType == "Weapon" then id1, qtytxt1, perctxt1 = id2, qtytxt2, perctxt2 end
 		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
 		probs[link] = perctxt1
 
-		val = string.format("%s (%s \206\188)", mode, mean)
+		val = string.format("%s (%s \206\188)", mode, GS(means[link]))
 		t[link] = val
 		return val
 	end,
 })
+PANDATAGS_DE_VALS, PANDATAGS_DE_VALS2 = values, means
 
 
 local f = CreateFrame("Frame")
