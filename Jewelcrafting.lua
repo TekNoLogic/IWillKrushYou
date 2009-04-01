@@ -110,7 +110,6 @@ local OnTooltipSetItem = function(frame, ...)
 			if id == 36912 then
 				local blue_sum = gemavg(WRATH_BLUE_GEMS) * 0.195
 				local green_sum = (GetAuctionBuyout(36932) + GetAuctionBuyout(36926)) * 1.1/3
-				print(de_values[42336])
 				local x = de_values[42336]
 				local de_sum = 1.1*2/3 * (de_means[42336] - math.min(GetAuctionBuyout(37701)*2, GetAuctionBuyout(35624)/5))
 				frame:AddDoubleLine("Crush & DE value:", GS((blue_sum + green_sum + de_sum)/5).."|r/ea")
