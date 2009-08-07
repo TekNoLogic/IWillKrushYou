@@ -6,6 +6,7 @@ local BC_GREEN_GEMS = {23077, 21929, 23112, 23079, 23117, 23107}
 local BC_BLUE_GEMS = {23436, 23439, 23440, 23437, 23438, 23441}
 local WRATH_GREEN_GEMS = {36917, 36929, 36920, 36932, 36923, 36926}
 local WRATH_BLUE_GEMS = {36918, 36930, 36921, 36933, 36924, 36927}
+local WRATH_PURPLE_GEMS = {36919, 36931, 36922, 36934, 36925, 36928}
 local CUTS = {
 	[23077] = {23094, 23095, 23097, 23096, 28595},
 	[21929] = {23098, 23099, 23100, 23101, 31866, 31869},
@@ -41,6 +42,12 @@ local CUTS = {
   [36933] = {40085, 40086, 40088, 40089, 40090, 40091, 40092, 40094, 40095, 40096, 40098, 40099, 40100, 40101, 40102, 40103, 40104, 40105, 40106},
   [36924] = {40008, 40009, 40010, 40011},
   [36927] = {40022, 40023, 40024, 40025, 40026, 40027, 40028, 40029, 40030, 40031, 40032, 40033, 40034},
+	[36919] = {40111, 40112, 40113, 40115, 40116, 40117, 40118, 40118},
+	[36931] = {40142, 40143, 40144, 40145, 40146, 40147, 40148, 40149, 40150, 40151, 40152, 40153, 40154, 40155, 40156, 40157, 40158, 40159, 40160, 40161, 40162, 40163},
+	[36922] = {40123, 40124, 40125, 40126, 40127, 40128},
+	[36934] = {40164, 40165, 40166, 40167, 40168, 40169, 40170, 40171, 40172, 40173, 40174, 40175, 40176, 40177, 40178, 40179},
+	[36925] = {40119, 40120, 40121, 40122},
+	[36928] = {40129, 40130, 40131, 40132, 40133, 40134, 40135, 40136, 40137, 40138, 40139, 40140, 40141, 40180, 40181, 40182},
 }
 
 local function GS(cash)
@@ -103,9 +110,15 @@ local OnTooltipSetItem = function(frame, ...)
 			if     id == 23424 then val = (1500 + gemavg(BC_GREEN_GEMS) * 1.027 + gemavg(BC_BLUE_GEMS) * 0.060) * 4
 			elseif id == 23425 then val = (2250 + gemavg(BC_GREEN_GEMS) * 1.100 + gemavg(BC_BLUE_GEMS) * 0.195) * 4
 			elseif id == 36909 then val = (gemavg(WRATH_GREEN_GEMS) * 1.027 + gemavg(WRATH_BLUE_GEMS) * 0.060) * 4
-			elseif id == 36912 then val = (gemavg(WRATH_GREEN_GEMS) * 1.100 + gemavg(WRATH_BLUE_GEMS) * 0.195) * 4 end
+			elseif id == 36912 then val = (gemavg(WRATH_GREEN_GEMS) * 1.100 + gemavg(WRATH_BLUE_GEMS) * 0.195) * 4
+			elseif id == 36910 then val = (gemavg(WRATH_GREEN_GEMS) * 1.500 + gemavg(WRATH_BLUE_GEMS) * 0.250 + gemavg(WRATH_PURPLE_GEMS) * 0.280) * 4 end
 
 			if val and val ~= 0 then frame:AddDoubleLine("Average crush value:", GS(val/20).."|cffffffff/ea - "..GS(val).."|cffffffff/stk") end
+
+			if id == 44943 then
+				local val = gemavg(WRATH_BLUE_GEMS) * 2.600 + (GetAuctionBuyout(42225) or 0) * 0.10
+				frame:AddDoubleLine("Average value of contents:", GS(val).."|cffffffff/ea")
+			end
 
 			if id == 36912 then
 				local blue_sum = gemavg(WRATH_BLUE_GEMS) * 0.195
