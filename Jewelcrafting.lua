@@ -94,7 +94,26 @@ local function gemavg(gems)
 end
 
 
+local greengemDEvalue
+local function greengemDE()
+	-- All gems but green and purple have a 1 gem, 2 crystal earth recipe that can be DE'd
+	-- 2x green + 2x purple + Eternal Earth == Jade Dagger Pendant (DE to a dream shard)
+	if not greengemDEvalue then
+		local ROYB_DE = GetAuctionBuyout(34054) * 0.75 * 2 + GetAuctionBuyout(34056) * 0.22 * 1.5 + GetAuctionBuyout(34053) * 0.03
+		local GP_DE = GetAuctionBuyout(34052)
+		local cryst_earth = math.min(GetAuctionBuyout(37701), GetAuctionBuyout(35624)/10)
+		greengemDEvalue = (ROYB_DE + GP_DE - cryst_earth*12)/4
+	end
+	return greengemDEvalue
+end
+
+
 local origs = {}
+local FEL_IRON_GREEN_RATE, FEL_IRON_BLUE_RATE = 1.027, 0.060
+local ADAMANTITE_GREEN_RATE, ADAMANTITE_BLUE_RATE = 1.100, 0.195
+local COBALT_GREEN_RATE, COBALT_BLUE_RATE = 1.5*1.5, 0.074
+local SARONITE_GREEN_RATE, SARONITE_BLUE_RATE = 1.1*1.5, .24
+local TITANIUM_GREEN_RATE, TITANIUM_BLUE_RATE, TITANIUM_PURPLE_RATE, TITANIUM_DUST_RATE = 1.5, 0.25, 0.27, 0.58
 local OnTooltipSetItem = function(frame, ...)
 	assert(frame, "arg 1 is nil, someone isn't hooking correctly")
 
@@ -107,25 +126,23 @@ local OnTooltipSetItem = function(frame, ...)
 			local id = tonumber((link:match("item:(%d+):")))
 
 			local val = 0
-			if     id == 23424 then val = (1500 + gemavg(BC_GREEN_GEMS) * 1.027 + gemavg(BC_BLUE_GEMS) * 0.060) * 4
-			elseif id == 23425 then val = (2250 + gemavg(BC_GREEN_GEMS) * 1.100 + gemavg(BC_BLUE_GEMS) * 0.195) * 4
-			elseif id == 36909 then val = (gemavg(WRATH_GREEN_GEMS) * 1.027 + gemavg(WRATH_BLUE_GEMS) * 0.060) * 4
-			elseif id == 36912 then val = (gemavg(WRATH_GREEN_GEMS) * 1.100 + gemavg(WRATH_BLUE_GEMS) * 0.195) * 4
-			elseif id == 36910 then val = (gemavg(WRATH_GREEN_GEMS) * 1.500 + gemavg(WRATH_BLUE_GEMS) * 0.250 + gemavg(WRATH_PURPLE_GEMS) * 0.280) * 4 end
+			if     id == 23424 then val = (gemavg(BC_GREEN_GEMS)  *   FEL_IRON_GREEN_RATE + gemavg(BC_BLUE_GEMS) *    FEL_IRON_BLUE_RATE) * 4
+			elseif id == 23425 then val = (gemavg(BC_GREEN_GEMS)  * ADAMANTITE_GREEN_RATE + gemavg(BC_BLUE_GEMS) *  ADAMANTITE_BLUE_RATE + 2250) * 4
+			elseif id == 36909 then val = (gemavg(WRATH_GREEN_GEMS) *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE) * 4
+			elseif id == 36912 then val = (gemavg(WRATH_GREEN_GEMS) * SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * SARONITE_BLUE_RATE) * 4
+			elseif id == 36910 then val = (gemavg(WRATH_GREEN_GEMS) * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE) * 4 end
+
+			local deval = 0
+			if     id == 36909 then deval = (greengemDE() *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE)/5
+			elseif id == 36912 then deval = (greengemDE() * SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * SARONITE_BLUE_RATE)/5
+			elseif id == 36910 then deval = (greengemDE() * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE  + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE)/5 end
 
 			if val and val ~= 0 then frame:AddDoubleLine("Average crush value:", GS(val/20).."|cffffffff/ea - "..GS(val).."|cffffffff/stk") end
+			if deval and deval ~= 0 then frame:AddDoubleLine("Crush & DE value:", GS(deval).."|cffffffff/ea") end
 
 			if id == 44943 then
 				local val = gemavg(WRATH_BLUE_GEMS) * 2.600 + (GetAuctionBuyout(42225) or 0) * 0.10
 				frame:AddDoubleLine("Average value of contents:", GS(val).."|cffffffff/ea")
-			end
-
-			if id == 36912 then
-				local blue_sum = gemavg(WRATH_BLUE_GEMS) * 0.195
-				local green_sum = (GetAuctionBuyout(36932) + GetAuctionBuyout(36926)) * 1.1/3
-				local x = de_values[42336]
-				local de_sum = 1.1*2/3 * (de_means[42336] - math.min(GetAuctionBuyout(37701)*2, GetAuctionBuyout(35624)/5))
-				frame:AddDoubleLine("Crush & DE value:", GS((blue_sum + green_sum + de_sum)/5).."|r/ea")
 			end
 		end
 	end
@@ -140,4 +157,4 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("AUCTION_ITEM_LIST_UPDATE")
-f:SetScript("OnEvent", function() for i in pairs(values) do values[i] = nil end end)
+f:SetScript("OnEvent", function() for i in pairs(values) do values[i] = nil end; greengemDEvalue = nil end)
