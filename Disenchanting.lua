@@ -162,6 +162,10 @@ local OnTooltipSetItem = function(frame, ...)
 		frame:AddDoubleLine("Disenchant ("..(probs[link] or "???").."):", results[link] or "???")
 		frame:AddDoubleLine("Estimated DE Value:", val)
 	end
+	if link:match("item:34057") then
+		local val = GetAuctionBuyout(34054) * 4.75 + GetAuctionBuyout(34055) * 1.75 -- Estimated 475% dust, 175% essence
+		frame:AddDoubleLine("Shatter Value:", GS(val))
+	end
 	if origs[frame] then return origs[frame](frame, ...) end
 end
 
