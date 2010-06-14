@@ -163,7 +163,7 @@ local OnTooltipSetItem = function(frame, ...)
 		frame:AddDoubleLine("Estimated DE Value:", val)
 	end
 	if link and link:match("item:34057") then
-		local val = GetAuctionBuyout(34054) * 4.75 + GetAuctionBuyout(34055) * 1.75 -- Estimated 475% dust, 175% essence
+		local val = GetAuctionBuyout(34054) * 9 * .45 + GetAuctionBuyout(34055) * 3.5 * .55
 		frame:AddDoubleLine("Shatter Value:", GS(val))
 	end
 	if origs[frame] then return origs[frame](frame, ...) end
