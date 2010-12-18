@@ -7,7 +7,7 @@ local SGLIMMERING, LGLIMMERING, SGLOWING, LGLOWING, SRADIANT, SDREAM = 10978, 11
 local LCELEST, GCELEST = 52718, 52719
 local LNETHER, GNETHER, LETERNAL, GETERNAL, LPLANAR, GPLANAR, LCOSMIC, GCOSMIC = 11174, 11175, 16202, 16203, 22447, 22446, 34056, 34055
 local LMAGIC, GMAGIC, LASTRAL, GASTRAL, LMYSTIC, GMYSTIC = 10938, 10939, 10998, 11082, 11134, 11135
-local STRANGE, SOUL, VISION, DREAM, ILLUSION, ARCANE, INFINATE, HYPNOTIC = 10940, 11083, 11137, 11176, 16204, 22445, 34054, 52555
+local STRANGE, SOUL, VISION, DREAM, ILLUSION, ARCANE, INFINITE, HYPNOTIC = 10940, 11083, 11137, 11176, 16204, 22445, 34054, 52555
 
 
 local function GetUncommonVals(ilvl)
@@ -25,8 +25,8 @@ local function GetUncommonVals(ilvl)
 	elseif ilvl <= 80 then return    ARCANE, "2-3x", "75%", 2.5, .75,  LPLANAR, "1-2x", "22%", 1.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
 	elseif ilvl <= 99 then return    ARCANE, "2-3x", "75%", 2.5, .75,  LPLANAR, "2-3x", "22%", 2.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
 	elseif ilvl <= 120 then return   ARCANE, "2-5x", "75%", 3.5, .75,  GPLANAR, "1-2x", "22%", 1.5, .22,  LPRISMATIC, "1x", "3%", 1, .03
-	elseif ilvl <= 151 then return INFINATE, "1-2x", "75%", 1.5, .75,  LCOSMIC, "1-2x", "22%", 1.5, .22,      SDREAM, "1x", "3%", 1, .03
-	elseif ilvl <= 187 then return INFINATE, "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03
+	elseif ilvl <= 151 then return INFINITE, "1-2x", "75%", 1.5, .75,  LCOSMIC, "1-2x", "22%", 1.5, .22,      SDREAM, "1x", "3%", 1, .03
+	elseif ilvl <= 187 then return INFINITE, "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03
 	elseif ilvl <= 289 then return HYPNOTIC, "1-3x", "75%", 2.0, .65,  LCELEST, "1-2x", "22%", 1.5, .35
 	else return                    HYPNOTIC, "1-4x", "75%", 2.5, .65,  GCELEST, "1-2x", "22%", 1.5, .35 end
 end
