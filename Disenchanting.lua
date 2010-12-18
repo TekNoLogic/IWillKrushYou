@@ -1,11 +1,13 @@
 ﻿
 -- I am lazy, so I "borrowed" these constants from Enchantrix ^^
-local VOID, NEXUS, ABYSS = 22450, 20725, 34057
+local VOID, NEXUS, ABYSS, MAELSTROM = 22450, 20725, 34057, 52722
+local SHEAVENLY, LHEAVENLY = 52720, 52721
 local LRADIANT, SBRILLIANT, LBRILLIANT, SPRISMATIC, LPRISMATIC, LDREAM = 11178, 14343, 14344, 22448, 22449, 34052
 local SGLIMMERING, LGLIMMERING, SGLOWING, LGLOWING, SRADIANT, SDREAM = 10978, 11084, 11138, 11139, 11177, 34053
+local LCELEST, GCELEST = 52718, 52719
 local LNETHER, GNETHER, LETERNAL, GETERNAL, LPLANAR, GPLANAR, LCOSMIC, GCOSMIC = 11174, 11175, 16202, 16203, 22447, 22446, 34056, 34055
 local LMAGIC, GMAGIC, LASTRAL, GASTRAL, LMYSTIC, GMYSTIC = 10938, 10939, 10998, 11082, 11134, 11135
-local STRANGE, SOUL, VISION, DREAM, ILLUSION, ARCANE, INFINATE = 10940, 11083, 11137, 11176, 16204, 22445, 34054
+local STRANGE, SOUL, VISION, DREAM, ILLUSION, ARCANE, INFINATE, HYPNOTIC = 10940, 11083, 11137, 11176, 16204, 22445, 34054, 52555
 
 
 local function GetUncommonVals(ilvl)
@@ -24,7 +26,9 @@ local function GetUncommonVals(ilvl)
 	elseif ilvl <= 99 then return    ARCANE, "2-3x", "75%", 2.5, .75,  LPLANAR, "2-3x", "22%", 2.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
 	elseif ilvl <= 120 then return   ARCANE, "2-5x", "75%", 3.5, .75,  GPLANAR, "1-2x", "22%", 1.5, .22,  LPRISMATIC, "1x", "3%", 1, .03
 	elseif ilvl <= 151 then return INFINATE, "1-2x", "75%", 1.5, .75,  LCOSMIC, "1-2x", "22%", 1.5, .22,      SDREAM, "1x", "3%", 1, .03
-	else return                    INFINATE, "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03 end
+	elseif ilvl <= 187 then return INFINATE, "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03
+	elseif ilvl <= 289 then return HYPNOTIC, "1-3x", "75%", 2.0, .65,  LCELEST, "1-2x", "22%", 1.5, .35
+	else return                    HYPNOTIC, "1-4x", "75%", 2.5, .65,  GCELEST, "1-2x", "22%", 1.5, .35 end
 end
 
 
@@ -42,7 +46,8 @@ local function GetPossibleDisenchants(item)
 		elseif ilvl <= 100 then return       VOID, "1-2x",    "100%", 1.5, 1
 		elseif ilvl <= 164 then return       VOID, "1-2x", "33%/66%", 5/3, 1
 		elseif ilvl <= 200 then return      ABYSS,   "1x",    "100%", 1.0, 1
-		else return                         ABYSS, "1-2x",    "100%", 1.5, 1 end
+		elseif ilvl <= 284 then return      ABYSS, "1-2x",    "100%", 1.5, 1
+		else return                     MAELSTROM,   "1x",    "100%", 1.0, 1 end
 
 	elseif qual == 3 then -- Rare
 		local _, _, itemid = string.find(link, "item:(%d+):")
@@ -59,7 +64,9 @@ local function GetPossibleDisenchants(item)
 		elseif ilvl <=  99 then return  SPRISMATIC, "1x", "99.5%", 1, .995, NEXUS, "1x", "0.5%", 1, 0.005
 		elseif ilvl <= 120 then return  LPRISMATIC, "1x", "99.5%", 1, .995,  VOID, "1x", "0.5%", 1, 0.005
 		elseif ilvl <= 165 then return      SDREAM, "1x", "99.5%", 1, .995, ABYSS, "1x", "0.5%", 1, 0.005
-		else return                         LDREAM, "1x", "99.5%", 1, .995, ABYSS, "1x", "0.5%", 1, 0.005 end -- Not sure the exact numbers in Wrath yet, so we'll stick to the pattern
+		elseif ilvl <= 200 then return      LDREAM, "1x", "99.5%", 1, .995, ABYSS, "1x", "0.5%", 1, 0.005
+		elseif ilvl <= 316 then return   SHEAVENLY, "1x",  "100%", 1, 1
+		else return                      LHEAVENLY, "1x",  "100%", 1, 1 end
 
 	elseif qual == 2 then -- Uncommon
 		if itemtype == "Armor" then
