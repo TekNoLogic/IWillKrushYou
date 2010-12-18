@@ -27,8 +27,8 @@ local function GetUncommonVals(ilvl)
 	elseif ilvl <= 120 then return   ARCANE, "2-5x", "75%", 3.5, .75,  GPLANAR, "1-2x", "22%", 1.5, .22,  LPRISMATIC, "1x", "3%", 1, .03
 	elseif ilvl <= 151 then return INFINITE, "1-2x", "75%", 1.5, .75,  LCOSMIC, "1-2x", "22%", 1.5, .22,      SDREAM, "1x", "3%", 1, .03
 	elseif ilvl <= 187 then return INFINITE, "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03
-	elseif ilvl <= 289 then return HYPNOTIC, "1-3x", "75%", 2.0, .65,  LCELEST, "1-2x", "22%", 1.5, .35
-	else return                    HYPNOTIC, "1-4x", "75%", 2.5, .65,  GCELEST, "1-2x", "22%", 1.5, .35 end
+	elseif ilvl <= 289 then return HYPNOTIC, "1-3x", "65%", 2.0, .65,  LCELEST, "1-2x", "35%", 1.5, .35
+	else return                    HYPNOTIC, "1-4x", "65%", 2.5, .65,  GCELEST, "1-2x", "35%", 1.5, .35 end
 end
 
 
