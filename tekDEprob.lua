@@ -35,24 +35,28 @@ local notDEable = {
 
 
 local function GetUncommonVals(ilvl)
-	if     ilvl <= 15  then return  STRANGE, "1-2x", "80%", 1.5, .80,   LMAGIC, "1-2x", "20%", 1.5, .20
-	elseif ilvl <= 20  then return  STRANGE, "2-3x", "75%", 2.5, .75,   GMAGIC, "1-2x", "20%", 1.5, .20, SGLIMMERING, "1x", "5%", 1, .05
-	elseif ilvl <= 25  then return  STRANGE, "4-6x", "75%", 5.0, .75,  LASTRAL, "1-2x", "15%", 1.5, .15, SGLIMMERING, "1x", "10%", 1, .1
-	elseif ilvl <= 30  then return     SOUL, "1-2x", "75%", 1.5, .75,  GASTRAL, "1-2x", "20%", 1.5, .20, LGLIMMERING, "1x", "5%", 1, .05
-	elseif ilvl <= 35  then return     SOUL, "2-5x", "75%", 3.5, .75,  LMYSTIC, "1-2x", "20%", 1.5, .20,    SGLOWING, "1x", "5%", 1, .05
-	elseif ilvl <= 40  then return   VISION, "1-2x", "75%", 1.5, .75,  GMYSTIC, "1-2x", "20%", 1.5, .20,    LGLOWING, "1x", "5%", 1, .05
-	elseif ilvl <= 45  then return   VISION, "2-5x", "75%", 3.5, .75,  LNETHER, "1-2x", "20%", 1.5, .20,    SRADIANT, "1x", "5%", 1, .05
-	elseif ilvl <= 50  then return    DREAM, "1-2x", "75%", 1.5, .75,  GNETHER, "1-2x", "20%", 1.5, .20,    LRADIANT, "1x", "5%", 1, .05
-	elseif ilvl <= 55  then return    DREAM, "2-5x", "75%", 3.5, .75, LETERNAL, "1-2x", "20%", 1.5, .20,  SBRILLIANT, "1x", "5%", 1, .05
-	elseif ilvl <= 60  then return ILLUSION, "1-2x", "75%", 1.5, .75, GETERNAL, "1-2x", "20%", 1.5, .20,  LBRILLIANT, "1x", "5%", 1, .05
-	elseif ilvl <= 65  then return ILLUSION, "2-5x", "75%", 3.5, .75, GETERNAL, "2-3x", "20%", 2.5, .20,  LBRILLIANT, "1x", "5%", 1, .05
-	elseif ilvl <= 80  then return   ARCANE, "2-3x", "75%", 2.5, .75,  LPLANAR, "1-2x", "22%", 1.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
-	elseif ilvl <= 99  then return   ARCANE, "2-3x", "75%", 2.5, .75,  LPLANAR, "2-3x", "22%", 2.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
-	elseif ilvl <= 120 then return   ARCANE, "2-5x", "75%", 3.5, .75,  GPLANAR, "1-2x", "22%", 1.5, .22,  LPRISMATIC, "1x", "3%", 1, .03
-	elseif ilvl <= 151 then return INFINITE, "1-2x", "75%", 1.5, .75,  LCOSMIC, "1-2x", "22%", 1.5, .22,      SDREAM, "1x", "3%", 1, .03
-	elseif ilvl <= 187 then return INFINITE, "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03
-	elseif ilvl <= 289 then return HYPNOTIC, "1-3x", "65%", 2.0, .65,  LCELEST, "1-2x", "35%", 1.5, .35
-	else return                    HYPNOTIC, "1-4x", "65%", 2.5, .65,  GCELEST, "1-2x", "35%", 1.5, .35 end
+	if     ilvl <= 15  then return  STRANGE,  "1-2x", "80%", 1.5, .80,   LMAGIC, "1-2x", "20%", 1.5, .20
+	elseif ilvl <= 20  then return  STRANGE,  "2-3x", "75%", 2.5, .75,   GMAGIC, "1-2x", "20%", 1.5, .20, SGLIMMERING, "1x", "5%", 1, .05
+	elseif ilvl <= 25  then return  STRANGE,  "4-6x", "75%", 5.0, .75,  LASTRAL, "1-2x", "15%", 1.5, .15, SGLIMMERING, "1x", "10%", 1, .1
+	elseif ilvl <= 30  then return     SOUL,  "1-2x", "75%", 1.5, .75,  GASTRAL, "1-2x", "20%", 1.5, .20, LGLIMMERING, "1x", "5%", 1, .05
+	elseif ilvl <= 35  then return     SOUL,  "2-5x", "75%", 3.5, .75,  LMYSTIC, "1-2x", "20%", 1.5, .20,    SGLOWING, "1x", "5%", 1, .05
+	elseif ilvl <= 40  then return   VISION,  "1-2x", "75%", 1.5, .75,  GMYSTIC, "1-2x", "20%", 1.5, .20,    LGLOWING, "1x", "5%", 1, .05
+	elseif ilvl <= 45  then return   VISION,  "2-5x", "75%", 3.5, .75,  LNETHER, "1-2x", "20%", 1.5, .20,    SRADIANT, "1x", "5%", 1, .05
+	elseif ilvl <= 50  then return    DREAM,  "1-2x", "75%", 1.5, .75,  GNETHER, "1-2x", "20%", 1.5, .20,    LRADIANT, "1x", "5%", 1, .05
+	elseif ilvl <= 55  then return    DREAM,  "2-5x", "75%", 3.5, .75, LETERNAL, "1-2x", "20%", 1.5, .20,  SBRILLIANT, "1x", "5%", 1, .05
+	elseif ilvl <= 60  then return ILLUSION,  "1-2x", "75%", 1.5, .75, GETERNAL, "1-2x", "20%", 1.5, .20,  LBRILLIANT, "1x", "5%", 1, .05
+	elseif ilvl <= 65  then return ILLUSION,  "2-5x", "75%", 3.5, .75, GETERNAL, "2-3x", "20%", 2.5, .20,  LBRILLIANT, "1x", "5%", 1, .05
+	elseif ilvl <= 80  then return   ARCANE,  "2-3x", "75%", 2.5, .75,  LPLANAR, "1-2x", "22%", 1.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
+	elseif ilvl <= 99  then return   ARCANE,  "2-3x", "75%", 2.5, .75,  LPLANAR, "2-3x", "22%", 2.5, .22,  SPRISMATIC, "1x", "3%", 1, .03
+	elseif ilvl <= 120 then return   ARCANE,  "2-5x", "75%", 3.5, .75,  GPLANAR, "1-2x", "22%", 1.5, .22,  LPRISMATIC, "1x", "3%", 1, .03
+	elseif ilvl <= 151 then return INFINITE,  "1-2x", "75%", 1.5, .75,  LCOSMIC, "1-2x", "22%", 1.5, .22,      SDREAM, "1x", "3%", 1, .03
+	elseif ilvl <= 187 then return INFINITE,  "2-5x", "75%", 3.5, .75,  GCOSMIC, "1-2x", "22%", 1.5, .22,      LDREAM, "1x", "3%", 1, .03
+	elseif ilvl <= 272 then return HYPNOTIC,  "1-3x", "75%", 2.0, .75,  LCELEST, "1-3x", "25%", 2.0, .25
+	elseif ilvl <= 289 then return HYPNOTIC,  "1-5x", "75%", 3.0, .75,  LCELEST, "1-5x", "25%", 3.0, .25
+	elseif ilvl <= 300 then return HYPNOTIC,  "1-7x", "75%", 4.0, .75,  LCELEST, "1-7x", "25%", 4.0, .25
+	elseif ilvl <= 312 then return HYPNOTIC,  "1-8x", "75%", 4.5, .75,  GCELEST, "1-2x", "25%", 1.5, .25
+	elseif ilvl <= 325 then return HYPNOTIC,  "1-9x", "75%", 5.0, .75,  GCELEST, "2-3x", "25%", 2.5, .25
+	else return                    HYPNOTIC, "1-10x", "75%", 5.5, .75,  GCELEST, "2-3x", "25%", 2.5, .25 end
 end
 
 
