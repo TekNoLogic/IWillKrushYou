@@ -7,6 +7,8 @@ local BC_BLUE_GEMS = {23436, 23439, 23440, 23437, 23438, 23441}
 local WRATH_GREEN_GEMS = {36917, 36929, 36920, 36932, 36923, 36926}
 local WRATH_BLUE_GEMS = {36918, 36930, 36921, 36933, 36924, 36927}
 local WRATH_PURPLE_GEMS = {36919, 36931, 36922, 36934, 36925, 36928}
+local CAT_GREEN_GEMS = {52177, 52181, 52179, 52182, 52178, 52180}
+local CAT_BLUE_GEMS = {52190, 52193, 52195, 52192, 52191, 52194}
 local CUTS = {
 	[23077] = {23094, 23095, 23097, 23096, 28595},
 	[21929] = {23098, 23099, 23100, 23101, 31866, 31869},
@@ -108,12 +110,19 @@ local function greengemDE()
 end
 
 
+-- Rates are the cumulative sum of all results divided by total prospects, from wowhead
+-- Since this is the number of prospects that yield the item, not the number of items
+-- received from teh prospect, we have to multiply the result rate by the avearage yield
+-- It is safe to assume that every quantity has equal frequency, so 2-5x is 3.5x avg
 local origs = {}
-local FEL_IRON_GREEN_RATE, FEL_IRON_BLUE_RATE = 1.027, 0.060
+local   FEL_IRON_GREEN_RATE,   FEL_IRON_BLUE_RATE = 1.027, 0.060
 local ADAMANTITE_GREEN_RATE, ADAMANTITE_BLUE_RATE = 1.100, 0.195
-local COBALT_GREEN_RATE, COBALT_BLUE_RATE = 1.5*1.5, 0.074
-local SARONITE_GREEN_RATE, SARONITE_BLUE_RATE = 1.1*1.5, .24
-local TITANIUM_GREEN_RATE, TITANIUM_BLUE_RATE, TITANIUM_PURPLE_RATE, TITANIUM_DUST_RATE = 1.5, 0.25, 0.27, 0.58
+local   COBALT_GREEN_RATE,       COBALT_BLUE_RATE = 1.5*1.5, 0.074
+local SARONITE_GREEN_RATE,     SARONITE_BLUE_RATE = 1.1*1.5, 0.240
+local TITANIUM_GREEN_RATE,     TITANIUM_BLUE_RATE, TITANIUM_PURPLE_RATE, TITANIUM_DUST_RATE = 1.5, 0.25, 0.27, 0.58
+local   OBSIDIUM_GREEN_RATE,   OBSIDIUM_BLUE_RATE = 1.415 *1.5, 0.075
+local ELEMENTIUM_GREEN_RATE, ELEMENTIUM_BLUE_RATE = 1.082 *1.5, 0.269
+local     PYRITE_GREEN_RATE,     PYRITE_BLUE_RATE = 1.000, 0.450 *1.5
 local OnTooltipSetItem = function(frame, ...)
 	assert(frame, "arg 1 is nil, someone isn't hooking correctly")
 
@@ -130,7 +139,10 @@ local OnTooltipSetItem = function(frame, ...)
 			elseif id == 23425 then val = (gemavg(BC_GREEN_GEMS)  * ADAMANTITE_GREEN_RATE + gemavg(BC_BLUE_GEMS) *  ADAMANTITE_BLUE_RATE + 2250) * 4
 			elseif id == 36909 then val = (gemavg(WRATH_GREEN_GEMS) *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE) * 4
 			elseif id == 36912 then val = (gemavg(WRATH_GREEN_GEMS) * SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * SARONITE_BLUE_RATE) * 4
-			elseif id == 36910 then val = (gemavg(WRATH_GREEN_GEMS) * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE) * 4 end
+			elseif id == 36910 then val = (gemavg(WRATH_GREEN_GEMS) * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE) * 4
+			elseif id == 53038 then val = (gemavg(CAT_GREEN_GEMS) *   OBSIDIUM_GREEN_RATE + gemavg(CAT_BLUE_GEMS) *   OBSIDIUM_BLUE_RATE) * 4
+			elseif id == 52185 then val = (gemavg(CAT_GREEN_GEMS) * ELEMENTIUM_GREEN_RATE + gemavg(CAT_BLUE_GEMS) * ELEMENTIUM_BLUE_RATE) * 4
+			elseif id == 52183 then val = (gemavg(CAT_GREEN_GEMS) *     PYRITE_GREEN_RATE + gemavg(CAT_BLUE_GEMS) *     PYRITE_BLUE_RATE + GetAuctionBuyout(52327)) * 4 end
 
 			local deval = 0
 			if     id == 36909 then deval = (greengemDE() *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE)/5
