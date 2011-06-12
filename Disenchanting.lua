@@ -47,7 +47,8 @@ local function GetPossibleDisenchants(item)
 		elseif ilvl <= 164 then return       VOID, "1-2x", "33%/66%", 5/3, 1
 		elseif ilvl <= 200 then return      ABYSS,   "1x",    "100%", 1.0, 1
 		elseif ilvl <= 284 then return      ABYSS, "1-2x",    "100%", 1.5, 1
-		else return                     MAELSTROM,   "1x",    "100%", 1.0, 1 end
+		elseif ilvl <= 359 then return  MAELSTROM,   "1x",    "100%", 1.0, 1
+		else return                     MAELSTROM, "1-2x",    "100%", 1.5, 1 end
 
 	elseif qual == 3 then -- Rare
 		local _, _, itemid = string.find(link, "item:(%d+):")
