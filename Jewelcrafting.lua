@@ -124,6 +124,21 @@ local function WrathGreenGemDE()
 end
 
 
+local PandaGreenGemDEvalue
+local function PandaGreenGemDE()
+	-- Spend 3 gems, get a piece of DEable armor
+	-- We get the ilvl 381-390 DE here:
+	--   85% 1-4x Spirit Dust
+	--   15%   1x Mysterious Essence
+	-- wowhead says 1-9 and 1-4 though...
+	if not PandaGreenGemDEvalue then
+		local DE = GetAuctionBuyout(74249) * 0.85 * 2.5 + GetAuctionBuyout(74250) * 0.15
+		PandaGreenGemDEvalue = DE/3
+	end
+	return PandaGreenGemDEvalue
+end
+
+
 -- Rates are the cumulative sum of all results divided by total prospects, from wowhead
 -- Since this is the number of prospects that yield the item, not the number of items
 -- received from the prospect, we have to multiply the result rate by the avearage yield
@@ -187,9 +202,11 @@ local OnTooltipSetItem = function(frame, ...)
 			elseif id == 72093 then val = (outputval + sparkShardValue() *   KYPARITE_SHARD_RATE) * 4 end
 
 			local deval = 0
-			if     id == 36909 then deval = (WrathGreenGemDE() *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE)/5
-			elseif id == 36912 then deval = (WrathGreenGemDE() * SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * SARONITE_BLUE_RATE)/5
-			elseif id == 36910 then deval = (WrathGreenGemDE() * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE  + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE)/5 end
+			if     id == 36909 then deval = (WrathGreenGemDE() *     COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *     COBALT_BLUE_RATE)/5
+			elseif id == 36912 then deval = (WrathGreenGemDE() *   SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   SARONITE_BLUE_RATE)/5
+			elseif id == 36910 then deval = (WrathGreenGemDE() *   TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE  + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE)/5
+			elseif id == 72092 then deval = (PandaGreenGemDE() * GHOST_IRON_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) * GHOST_IRON_BLUE_RATE)/5
+			elseif id == 72093 then deval = (PandaGreenGemDE() *   KYPARITE_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   KYPARITE_BLUE_RATE)/5 end
 
 			if val and val ~= 0 then frame:AddDoubleLine("Average crush value:", GS(val/20).."|cffffffff/ea - "..GS(val).."|cffffffff/stk") end
 			if deval and deval ~= 0 then frame:AddDoubleLine("Crush & DE value:", GS(deval).."|cffffffff/ea") end
