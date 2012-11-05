@@ -13,9 +13,8 @@
 ## LoadOnDemand: 1
 ## LoadWith: tekauc
 
-LibStub.lua
-tekIDmemo.lua
-tekDEprob.lua
+externals\disenchant_probability.lua
+externals\itemid.lua
 
 Milling.lua
 Disenchanting.lua
