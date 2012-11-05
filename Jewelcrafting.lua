@@ -110,17 +110,17 @@ local function gemavg(gems)
 end
 
 
-local greengemDEvalue
-local function greengemDE()
+local WrathGreenGemDEvalue
+local function WrathGreenGemDE()
 	-- All gems but green and purple have a 1 gem, 2 crystal earth recipe that can be DE'd
 	-- 2x green + 2x purple + Eternal Earth == Jade Dagger Pendant (DE to a dream shard)
-	if not greengemDEvalue then
+	if not WrathGreenGemDEvalue then
 		local ROYB_DE = GetAuctionBuyout(34054) * 0.75 * 2 + GetAuctionBuyout(34056) * 0.22 * 1.5 + GetAuctionBuyout(34053) * 0.03
 		local GP_DE = GetAuctionBuyout(34052)
 		local cryst_earth = math.min(GetAuctionBuyout(37701), GetAuctionBuyout(35624)/10)
-		greengemDEvalue = (ROYB_DE + GP_DE - cryst_earth*12)/4
+		WrathGreenGemDEvalue = (ROYB_DE + GP_DE - cryst_earth*12)/4
 	end
-	return greengemDEvalue
+	return WrathGreenGemDEvalue
 end
 
 
@@ -187,9 +187,9 @@ local OnTooltipSetItem = function(frame, ...)
 			elseif id == 72093 then val = (outputval + sparkShardValue() *   KYPARITE_SHARD_RATE) * 4 end
 
 			local deval = 0
-			if     id == 36909 then deval = (greengemDE() *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE)/5
-			elseif id == 36912 then deval = (greengemDE() * SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * SARONITE_BLUE_RATE)/5
-			elseif id == 36910 then deval = (greengemDE() * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE  + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE)/5 end
+			if     id == 36909 then deval = (WrathGreenGemDE() *   COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   COBALT_BLUE_RATE)/5
+			elseif id == 36912 then deval = (WrathGreenGemDE() * SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * SARONITE_BLUE_RATE)/5
+			elseif id == 36910 then deval = (WrathGreenGemDE() * TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) * TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE  + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE)/5 end
 
 			if val and val ~= 0 then frame:AddDoubleLine("Average crush value:", GS(val/20).."|cffffffff/ea - "..GS(val).."|cffffffff/stk") end
 			if deval and deval ~= 0 then frame:AddDoubleLine("Crush & DE value:", GS(deval).."|cffffffff/ea") end
@@ -211,4 +211,4 @@ end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("AUCTION_ITEM_LIST_UPDATE")
-f:SetScript("OnEvent", function() for i in pairs(values) do values[i] = nil end; greengemDEvalue = nil end)
+f:SetScript("OnEvent", function() for i in pairs(values) do values[i] = nil end; WrathGreenGemDEvalue = nil end)
