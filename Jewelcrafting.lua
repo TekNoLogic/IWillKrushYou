@@ -153,6 +153,7 @@ local ELEMENTIUM_GREEN_RATE, ELEMENTIUM_BLUE_RATE = 1.082*1.5, 0.269
 local     PYRITE_GREEN_RATE,     PYRITE_BLUE_RATE = 1.000, 0.450*1.5
 local GHOST_IRON_GREEN_RATE, GHOST_IRON_BLUE_RATE, GHOST_IRON_SHARD_RATE = 1.415*1.5, 0.272, 0.802*1.5
 local   KYPARITE_GREEN_RATE,   KYPARITE_BLUE_RATE,   KYPARITE_SHARD_RATE = 1.426*1.5, 0.275*1.5, 1.000*1.5
+local   TRILLIUM_GREEN_RATE,   TRILLIUM_BLUE_RATE,   TRILLIUM_SHARD_RATE = 1.000*1.0, 0.750*1.0, 1.000*1.5
 local function gemOutputValue(id)
 	if     id == 23424 then return gemavg(BC_GREEN_GEMS)    *   FEL_IRON_GREEN_RATE + gemavg(BC_BLUE_GEMS)    *   FEL_IRON_BLUE_RATE
 	elseif id == 23425 then return gemavg(BC_GREEN_GEMS)    * ADAMANTITE_GREEN_RATE + gemavg(BC_BLUE_GEMS)    * ADAMANTITE_BLUE_RATE
@@ -163,7 +164,9 @@ local function gemOutputValue(id)
 	elseif id == 52185 then return gemavg(CAT_GREEN_GEMS)   * ELEMENTIUM_GREEN_RATE + gemavg(CAT_BLUE_GEMS)   * ELEMENTIUM_BLUE_RATE
 	elseif id == 52183 then return gemavg(CAT_GREEN_GEMS)   *     PYRITE_GREEN_RATE + gemavg(CAT_BLUE_GEMS)   *     PYRITE_BLUE_RATE
 	elseif id == 72092 then return gemavg(PANDA_GREEN_GEMS) * GHOST_IRON_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) * GHOST_IRON_BLUE_RATE
-	elseif id == 72093 then return gemavg(PANDA_GREEN_GEMS) *   KYPARITE_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   KYPARITE_BLUE_RATE end
+	elseif id == 72093 then return gemavg(PANDA_GREEN_GEMS) *   KYPARITE_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   KYPARITE_BLUE_RATE
+	elseif id == 72094 then return gemavg(PANDA_GREEN_GEMS) *   TRILLIUM_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   TRILLIUM_BLUE_RATE
+	elseif id == 72103 then return gemavg(PANDA_GREEN_GEMS) *   TRILLIUM_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   TRILLIUM_BLUE_RATE end
 end
 
 local function sparkShardValue()
@@ -199,14 +202,18 @@ local OnTooltipSetItem = function(frame, ...)
 			elseif id == 36910 then val = (outputval + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE) * 4
 			elseif id == 52183 then val = (outputval + GetAuctionBuyout(52327)) * 4
 			elseif id == 72092 then val = (outputval + sparkShardValue() * GHOST_IRON_SHARD_RATE) * 4
-			elseif id == 72093 then val = (outputval + sparkShardValue() *   KYPARITE_SHARD_RATE) * 4 end
+			elseif id == 72093 then val = (outputval + sparkShardValue() *   KYPARITE_SHARD_RATE) * 4
+			elseif id == 72094 then val = (outputval + sparkShardValue() *   TRILLIUM_SHARD_RATE) * 4
+			elseif id == 72103 then val = (outputval + sparkShardValue() *   TRILLIUM_SHARD_RATE) * 4 end
 
 			local deval = 0
 			if     id == 36909 then deval = (WrathGreenGemDE() *     COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *     COBALT_BLUE_RATE)/5
 			elseif id == 36912 then deval = (WrathGreenGemDE() *   SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   SARONITE_BLUE_RATE)/5
 			elseif id == 36910 then deval = (WrathGreenGemDE() *   TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   TITANIUM_BLUE_RATE + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE  + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE)/5
 			elseif id == 72092 then deval = (PandaGreenGemDE() * GHOST_IRON_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) * GHOST_IRON_BLUE_RATE)/5
-			elseif id == 72093 then deval = (PandaGreenGemDE() *   KYPARITE_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   KYPARITE_BLUE_RATE)/5 end
+			elseif id == 72093 then deval = (PandaGreenGemDE() *   KYPARITE_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   KYPARITE_BLUE_RATE)/5
+			elseif id == 72094 then deval = (PandaGreenGemDE() *   TRILLIUM_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   TRILLIUM_BLUE_RATE)/5
+			elseif id == 72103 then deval = (PandaGreenGemDE() *   TRILLIUM_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   TRILLIUM_BLUE_RATE)/5 end
 
 			if val and val ~= 0 then frame:AddDoubleLine("Average crush value:", GS(val/20).."|cffffffff/ea - "..GS(val).."|cffffffff/stk") end
 			if deval and deval ~= 0 then frame:AddDoubleLine("Crush & DE value:", GS(deval).."|cffffffff/ea") end
