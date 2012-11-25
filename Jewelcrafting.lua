@@ -82,7 +82,7 @@ local values = setmetatable({}, {
 	__index = function(t, link)
 		if not link then return end
 		local id = tonumber((link:match("item:(%d+):")))
-		if not id or not CUTS[id] or not GetAuctionBuyout(id) then return end
+		if not id or not CUTS[id] then return end
 
 		local val, count = 0, 0
 		for _,cutid in pairs(CUTS[id]) do
@@ -90,7 +90,12 @@ local values = setmetatable({}, {
 			if sell and sell > 0 then val, count = val + sell, count + 1 end
 		end
 		if count > 0 then
-			val = string.format("%s |cffffffff(%.2f%% profit)", GS(val/count), ((val/count)/GetAuctionBuyout(id) - 1) * 100)
+			local base_ah = GetAuctionBuyout(id)
+			if base_ah then
+				val = string.format("%s |cffffffff(%.2f%% profit)", GS(val/count), ((val/count)/base_ah - 1) * 100)
+			else
+				val = GS(val/count)
+			end
 			t[link] = val
 			return val
 		end
