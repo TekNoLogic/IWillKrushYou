@@ -27,20 +27,33 @@ local values = setmetatable({}, {
 			return
 		end
 
-		local id1, qtytxt1, perctxt1, qty1, weight1, id2, qtytxt2, perctxt2, qty2, weight2, id3, _, _, qty3, weight3 = ns.GetPossibleDisenchants(link)
+		local id1, qtytxt1, perctxt1, qty1, weight1, id2, qtytxt2, perctxt2, qty2,
+			weight2, id3, _, _, qty3, weight3 = ns.GetPossibleDisenchants(link)
 		if not id1 then return end
-		local bo1, bo2, bo3 = GetAuctionBuyout(id1), id2 and GetAuctionBuyout(id2), id3 and GetAuctionBuyout(id3)
-		if not bo1 or (id2 and not bo2) or (id3 and not bo3) then return end
-		means[link] = (qty1*weight1*bo1 or 0) + (bo2 and qty2*weight2*bo2 or 0) + (bo3 and qty3*weight3*bo3 or 0)
-		local mode = GS(qty1*bo1)
 
-		if qual == 2 and itemType == "Weapon" then id1, qtytxt1, perctxt1 = id2, qtytxt2, perctxt2 end
+		local bo1 = GetAuctionBuyout(id1)
+		local bo2 = id2 and GetAuctionBuyout(id2)
+		local bo3 = id3 and GetAuctionBuyout(id3)
+
+		if bo1 and (bo2 or not id2) and (bo3 or not id3) then
+			local val1 = qty1 * weight1 * bo1
+			local val2 = bo2 and qty2 * weight2 * bo2 or 0
+			local val3 = bo3 and qty3 * weight3 * bo3 or 0
+			means[link] = GS(val1 + val2 + val3)
+		end
+
+		-- We need to flip for low level weapons, so we get the common item
+		if qual == 2 and itemType == "Weapon" and itemLevel < 380 then
+			qty1, bo1, id1, qtytxt1, perctxt1 = qty2, bo2, id2, qtytxt2, perctxt2
+		end
 		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
 		probs[link] = perctxt1
 
-		val = string.format("%s (%s \206\188)", mode, GS(means[link]))
-		t[link] = val
-		return val
+		if bo1 then
+			local val = GS(qty1*bo1)
+			t[link] = val
+			return val
+		end
 	end,
 })
 PANDATAGS_DE_VALS, PANDATAGS_DE_VALS2 = values, means
@@ -56,14 +69,24 @@ local OnTooltipSetItem = function(frame, ...)
 
 	local _, link = frame:GetItem()
 	local val = values[link]
-	if val and val ~= 0 then
-		frame:AddDoubleLine("Disenchant ("..(probs[link] or "???").."):", results[link] or "???")
-		frame:AddDoubleLine("Estimated DE Value:", val)
+	local meanval = means[link]
+
+	if val ~= false and probs[link] and results[link] then
+		frame:AddDoubleLine("Disenchant ("..probs[link].."):", results[link])
 	end
+
+	if val then
+		frame:AddDoubleLine("Common DE Value:", val)
+		if meanval then
+			frame:AddDoubleLine("Average DE Value:", meanval)
+		end
+	end
+
 	if link and link:match("item:34057") then
 		local val = GetAuctionBuyout(34054) * 9 * .45 + GetAuctionBuyout(34055) * 3.5 * .55
 		frame:AddDoubleLine("Shatter Value:", GS(val))
 	end
+
 	if origs[frame] then return origs[frame](frame, ...) end
 end
 
