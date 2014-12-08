@@ -98,7 +98,7 @@ function GetAuctionBuyout(item)
 		if best then
 			if id == 39151 then      return 5 / 2.5 * best
 			elseif id == 114931 then return 5 / 2.0 * best
-			else                     return 5 / 3.0 * best
+			else                     return 5 / 3.0 * best end
 		end
 	end
 	if orig then return orig(item) end
