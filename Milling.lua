@@ -53,7 +53,7 @@ local ucinks = {
 	[61981] = 61980,
 	[79255] = 79253,
 }
-local currency_ink = 79254
+local currency_ink = 113111
 
 local function getbest(t)
 	local min
