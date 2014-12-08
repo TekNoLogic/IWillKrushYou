@@ -96,7 +96,7 @@ function GetAuctionBuyout(item)
 		-- Common pygments drop an average 3 items per milling, with some exceptions
 		local best = getbest(cpigments[id])
 		if best then
-			if id == 39151 then      return 5 / 2.5 * best
+			if     id == 39151  then return 5 / 2.5 * best
 			elseif id == 114931 then return 5 / 2.0 * best
 			else                     return 5 / 3.0 * best end
 		end
