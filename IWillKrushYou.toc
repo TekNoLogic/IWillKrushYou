@@ -1,11 +1,8 @@
-## Interface: 30000
+## Interface: 70000
 
-## Title: PandaTags
+## Title: IWillKrushYou
 ## Notes: DE, prospecting and milling price estimates
 ## Author: Tekkub Stoutwrithe
-## Version: Alpha
-## X-Website: http://code.google.com/p/tekkub-wow/
-## X-Email: tekkub-wow@googlegroups.com
 ## X-Category: Tradeskills
 
 ## OptionalDeps: tekDebug, tekErr
