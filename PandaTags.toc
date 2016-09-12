@@ -11,7 +11,7 @@
 ## OptionalDeps: tekDebug, tekErr
 
 ## LoadOnDemand: 1
-## LoadWith: tekauc
+## LoadWith: tekauc, tekauc_data
 
 externals\disenchant_probability.lua
 externals\itemid.lua
