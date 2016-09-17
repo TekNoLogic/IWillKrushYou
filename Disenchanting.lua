@@ -56,7 +56,6 @@ local values = setmetatable({}, {
 		end
 	end,
 })
-PANDATAGS_DE_VALS, PANDATAGS_DE_VALS2 = values, means
 
 
 local f = CreateFrame("Frame")
