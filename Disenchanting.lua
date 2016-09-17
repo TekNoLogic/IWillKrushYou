@@ -46,6 +46,8 @@ local values = setmetatable({}, {
 		if qual == 2 and itemType == "Weapon" and itemLevel < 380 then
 			qty1, bo1, id1, qtytxt1, perctxt1 = qty2, bo2, id2, qtytxt2, perctxt2
 		end
+		assert(qtytxt1, "No qtytext found for ".. link)
+		assert(select(2, GetItemInfo(id1)), "No link found for id ".. id1.. " on item "..link)
 		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
 		probs[link] = perctxt1
 
