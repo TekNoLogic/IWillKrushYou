@@ -1,2 +1,4 @@
 disenchant_probability.lua
+ilvl.lua
 itemid.lua
+tooltip_scanner.lua

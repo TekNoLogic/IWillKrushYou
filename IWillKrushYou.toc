@@ -12,6 +12,8 @@
 
 externals\disenchant_probability.lua
 externals\itemid.lua
+externals\tooltip_scanner.lua
+externals\ilvl.lua
 
 Milling.lua
 Disenchanting.lua
