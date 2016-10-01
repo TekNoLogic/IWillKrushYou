@@ -24,10 +24,9 @@ local function GetFilletedPrice(id)
 	if not flesh_id then return false end
 
 	local price = GetAuctionBuyout(tonumber(flesh_id))
-	print(id, flesh_id, qty, price)
 	if not price then return end
 
-	return price * tonumber(qty)
+	return ns.GS(price * tonumber(qty))
 end
 
 
