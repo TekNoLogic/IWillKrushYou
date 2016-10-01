@@ -19,4 +19,5 @@ PreCache.lua
 
 Milling.lua
 Disenchanting.lua
+DraenorFish.lua
 Jewelcrafting.lua
