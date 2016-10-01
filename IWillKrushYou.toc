@@ -10,6 +10,7 @@
 ## LoadOnDemand: 1
 ## LoadWith: tekauc, tekauc_data
 
+externals\gsc.lua
 externals\itemid.lua
 externals\tooltip_scanner.lua
 externals\ilvl.lua
