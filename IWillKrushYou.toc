@@ -12,6 +12,7 @@
 
 externals\gsc.lua
 externals\itemid.lua
+externals\memoizing_table.lua
 externals\tooltip_scanner.lua
 externals\ilvl.lua
 externals\disenchant_probability.lua
@@ -23,4 +24,7 @@ Disenchanting.lua
 DraenorFish.lua
 Jewelcrafting.lua
 
+gems\price.lua
+gems\tooltip.lua
+gems\bc.lua
 gems\legion.lua
