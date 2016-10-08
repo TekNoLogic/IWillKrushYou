@@ -20,10 +20,13 @@ local function AveragePrice(ids)
 end
 
 
+local vendor_prices = {
+	[24243] = 2250, -- Adamantite Powder
+}
 local prices = ns.NewMemoizingTable(function(i)
 	local t = type(i)
 	if t == "table" then return AveragePrice(i) end
-	if t == "number" then return GetAuctionBuyout(i) or 0 end
+	if t == "number" then return vendor_prices[i] or GetAuctionBuyout(i) or 0 end
 	return 0
 end)
 

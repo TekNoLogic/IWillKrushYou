@@ -1,6 +1,4 @@
-﻿
-local BC_GREEN_GEMS = {23077, 21929, 23112, 23079, 23117, 23107}
-local BC_BLUE_GEMS = {23436, 23439, 23440, 23437, 23438, 23441}
+
 local WRATH_GREEN_GEMS = {36917, 36929, 36920, 36932, 36923, 36926}
 local WRATH_BLUE_GEMS = {36918, 36930, 36921, 36933, 36924, 36927}
 local WRATH_PURPLE_GEMS = {36919, 36931, 36922, 36934, 36925, 36928}
@@ -157,9 +155,7 @@ local GHOST_IRON_GREEN_RATE, GHOST_IRON_BLUE_RATE, GHOST_IRON_SHARD_RATE = 1.415
 local   KYPARITE_GREEN_RATE,   KYPARITE_BLUE_RATE,   KYPARITE_SHARD_RATE = 1.426*1.5, 0.275*1.5, 1.000*1.5
 local   TRILLIUM_GREEN_RATE,   TRILLIUM_BLUE_RATE,   TRILLIUM_SHARD_RATE = 1.000*1.0, 0.750*1.0, 1.000*1.5
 local function gemOutputValue(id)
-	if     id == 23424 then return gemavg(BC_GREEN_GEMS)    *   FEL_IRON_GREEN_RATE + gemavg(BC_BLUE_GEMS)    *   FEL_IRON_BLUE_RATE
-	elseif id == 23425 then return gemavg(BC_GREEN_GEMS)    * ADAMANTITE_GREEN_RATE + gemavg(BC_BLUE_GEMS)    * ADAMANTITE_BLUE_RATE
-	elseif id == 36909 then return gemavg(WRATH_GREEN_GEMS) *     COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *     COBALT_BLUE_RATE
+	if     id == 36909 then return gemavg(WRATH_GREEN_GEMS) *     COBALT_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *     COBALT_BLUE_RATE
 	elseif id == 36912 then return gemavg(WRATH_GREEN_GEMS) *   SARONITE_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   SARONITE_BLUE_RATE
 	elseif id == 36910 then return gemavg(WRATH_GREEN_GEMS) *   TITANIUM_GREEN_RATE + gemavg(WRATH_BLUE_GEMS) *   TITANIUM_BLUE_RATE
 	elseif id == 53038 then return gemavg(CAT_GREEN_GEMS)   *   OBSIDIUM_GREEN_RATE + gemavg(CAT_BLUE_GEMS)   *   OBSIDIUM_BLUE_RATE
@@ -179,7 +175,6 @@ end
 
 -- IDs of ores that don't need extra calculations factored in
 local simpleCalcs = {
-	[23424] = true,
 	[36909] = true,
 	[36912] = true,
 	[53038] = true,
@@ -200,7 +195,6 @@ local OnTooltipSetItem = function(frame, ...)
 			local val = 0
 			local outputval = gemOutputValue(id)
 			if simpleCalcs[id] then val = outputval * 4
-			elseif id == 23425 then val = (outputval + 2250) * 4
 			elseif id == 36910 then val = (outputval + gemavg(WRATH_PURPLE_GEMS) * TITANIUM_PURPLE_RATE + GetAuctionBuyout(46849) * TITANIUM_DUST_RATE) * 4
 			elseif id == 52183 then val = (outputval + GetAuctionBuyout(52327)) * 4
 			elseif id == 72092 then val = (outputval + sparkShardValue() * GHOST_IRON_SHARD_RATE) * 4
