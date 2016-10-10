@@ -22,7 +22,6 @@ PreCache.lua
 Milling.lua
 Disenchanting.lua
 DraenorFish.lua
-Jewelcrafting.lua
 
 gems\price.lua
 gems\tooltip.lua
