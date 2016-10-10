@@ -14,7 +14,7 @@ local OnTooltipSetItem = function(frame, ...)
 
 	local _, link = frame:GetItem()
 	if link then
-		local id = tonumber((link:match("item:(%d+):")))
+		local id = ns.ids[link]
 		local val = id and ns.crush_values[id]
 
 		if val and val ~= 0 then
