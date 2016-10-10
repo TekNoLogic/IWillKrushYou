@@ -5,17 +5,6 @@ local WRATH_PURPLE_GEMS = {36919, 36931, 36922, 36934, 36925, 36928}
 local PANDA_GREEN_GEMS = {76136, 76130, 76134, 76137, 76133, 76135}
 local PANDA_BLUE_GEMS = {76131, 76140, 76142, 76139, 76138, 76141}
 
-local function GS(cash)
-	if not cash then return end
-	if cash > 999999 then return "|cffffd700".. floor(cash/10000) end
-
-	cash = cash/100
-	local s = floor(cash%100)
-	local g = floor(cash/100)
-	if g > 0 then return string.format("|cffffd700%d.|cffc7c7cf%02d", g, s)
-	else return string.format("|cffc7c7cf%d", s) end
-end
-
 
 local function gemavg(gems)
 	local sum, skipped = 0, 0
@@ -90,11 +79,11 @@ local OnTooltipSetItem = function(frame, ...)
 		elseif id == 72094 then deval = (PandaGreenGemDE() *   TRILLIUM_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   TRILLIUM_BLUE_RATE)/5
 		elseif id == 72103 then deval = (PandaGreenGemDE() *   TRILLIUM_GREEN_RATE + gemavg(PANDA_BLUE_GEMS) *   TRILLIUM_BLUE_RATE)/5 end
 
-		if deval and deval ~= 0 then frame:AddDoubleLine("Crush & DE value:", GS(deval).."|cffffffff/ea") end
+		if deval and deval ~= 0 then frame:AddDoubleLine("Crush & DE value:", ns.GS(deval).."|cffffffff/ea") end
 
 		if id == 44943 then
 			local val = gemavg(WRATH_BLUE_GEMS) * 2.600 + (GetAuctionBuyout(42225) or 0) * 0.10
-			frame:AddDoubleLine("Average value of contents:", GS(val).."|cffffffff/ea")
+			frame:AddDoubleLine("Average value of contents:", ns.GS(val).."|cffffffff/ea")
 		end
 	end
 	if origs[frame] then return origs[frame](frame, ...) end
