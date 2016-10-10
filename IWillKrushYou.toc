@@ -27,4 +27,7 @@ Jewelcrafting.lua
 gems\price.lua
 gems\tooltip.lua
 gems\bc.lua
+gems\wrath.lua
+gems\cat.lua
+gems\panda.lua
 gems\legion.lua
