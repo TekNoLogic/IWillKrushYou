@@ -17,7 +17,7 @@ externals\itemid.lua
 externals\memoizing_table.lua
 externals\disenchant_probability.lua
 
-PreCache.lua
+services\precache.lua
 
 Milling.lua
 Disenchanting.lua
