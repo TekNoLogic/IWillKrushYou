@@ -10,6 +10,7 @@
 ## LoadOnDemand: 1
 ## LoadWith: tekauc, tekauc_data
 
+externals\events.lua
 externals\gsc.lua
 externals\ilvl.lua
 externals\itemid.lua
