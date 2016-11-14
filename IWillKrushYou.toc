@@ -11,10 +11,9 @@
 ## LoadWith: tekauc, tekauc_data
 
 externals\gsc.lua
+externals\ilvl.lua
 externals\itemid.lua
 externals\memoizing_table.lua
-externals\tooltip_scanner.lua
-externals\ilvl.lua
 externals\disenchant_probability.lua
 
 PreCache.lua

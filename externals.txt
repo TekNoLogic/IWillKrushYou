@@ -3,4 +3,3 @@ gsc.lua
 ilvl.lua
 itemid.lua
 memoizing_table.lua
-tooltip_scanner.lua
