@@ -1,5 +1,8 @@
 
-local mats = {
+local myname, ns = ...
+
+
+local MATS = {
 	22450, 20725, 34057, 52722,
 	52720, 52721,
 	11178, 14343, 14344, 22448, 22449, 34052,
@@ -12,4 +15,26 @@ local mats = {
 	109693, 111245, 113588,
 	124440, 124441, 124442,
 }
-for _,id in pairs(mats) do GetItemInfo(id) end
+local ids = {}
+for _,id in pairs(MATS) do ids[id] = true end
+
+
+local function Scan()
+	for id in pairs(ids) do
+		if GetItemInfo(id) then ids[id] = nil end
+	end
+end
+
+
+local function OnItemInfoReceived(self, event, item_id)
+	ids[item_id] = nil
+	if not next(ids) then
+		return ns.RegisterCallback(self, "GET_ITEM_INFO_RECEIVED")
+	end
+
+	C_Timer.After(1, Scan)
+end
+
+
+ns.RegisterCallback(ids, "_THIS_ADDON_LOADED", Scan)
+ns.RegisterCallback(ids, "GET_ITEM_INFO_RECEIVED", OnItemInfoReceived)
