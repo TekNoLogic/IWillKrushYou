@@ -19,19 +19,29 @@ local ids = {}
 for _,id in pairs(MATS) do ids[id] = true end
 
 
+local dirty = true
 local function Scan()
+	if not dirty then return end
+	dirty = false
+
 	for id in pairs(ids) do
-		if GetItemInfo(id) then ids[id] = nil end
+		local _, link = GetItemInfo(id)
+		if link then ids[id] = nil end
+	end
+
+	if next(ids) then
+		dirty = true
+		C_Timer.After(10, Scan)
+	else
+		ns.UnregisterCallback(ids, "GET_ITEM_INFO_RECEIVED")
 	end
 end
 
 
 local function OnItemInfoReceived(self, event, item_id)
-	ids[item_id] = nil
-	if not next(ids) then
-		return ns.RegisterCallback(self, "GET_ITEM_INFO_RECEIVED")
-	end
-
+	if not ids[item_id] then return end
+	
+	dirty = true
 	C_Timer.After(1, Scan)
 end
 
