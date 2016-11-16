@@ -23,6 +23,8 @@ Milling.lua
 Disenchanting.lua
 DraenorFish.lua
 
+bop_reagents.lua
+
 gems\price.lua
 gems\tooltip.lua
 gems\bc.lua
