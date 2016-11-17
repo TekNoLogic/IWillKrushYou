@@ -8,10 +8,11 @@ local GEM_CHIP = 129100
 
 -- These rates are the average number of gems obtained from prospecting ONE ore
 -- Obtained via experimentation during patch 7.0.3
+-- Felslate updated with data from 7.1
 local LAYSTONE_GREEN_RATE = 12 / 200
 local LAYSTONE_BLUE_RATE = 1.5 / 200
 local LAYSTONE_CHIP_RATE = 40 / 200
-local FELSLATE_GREEN_RATE = 44 / 200
+local FELSLATE_GREEN_RATE = 45 / 200
 local FELSLATE_BLUE_RATE = 7 / 200
 local FELSLATE_CHIP_RATE = 40 / 200
 local GREEN_GEMS = {130172, 130173, 130174, 130175, 130176, 130177}
