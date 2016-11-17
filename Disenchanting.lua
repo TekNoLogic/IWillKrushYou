@@ -3,7 +3,6 @@ local myname, ns = ...
 local GetItemInfo = GetItemInfo
 
 
-local results = {}
 local values = setmetatable({}, {
 	__index = function(t, link)
 		if not link or not GetItemInfo(link) then return end
@@ -13,23 +12,14 @@ local values = setmetatable({}, {
 			return
 		end
 
-		local id1, qtytxt1, perctxt1, qty1, weight1, id2, _, _, qty2, weight2,
-			id3, _, _, qty3, weight3 = ns.GetPossibleDisenchants(link)
-		if not id1 then return end
+		local id, _, _, qty = ns.GetPossibleDisenchants(link)
 
-		local bo1 = GetAuctionBuyout(id1)
-		local bo2 = id2 and GetAuctionBuyout(id2)
-		local bo3 = id3 and GetAuctionBuyout(id3)
+		local bo1 = id and GetAuctionBuyout(id)
+		if not bo1 then return end
 
-		assert(select(2, GetItemInfo(id1)), "No link found for id ".. id1.. " on item "..link)
-		assert(qtytxt1, "No qtytext found for ".. link)
-		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
-
-		if bo1 then
-			local val = ns.GS(qty1*bo1)
-			t[link] = val
-			return val
-		end
+		local val = ns.GS(qty*bo1)
+		t[link] = val
+		return val
 	end,
 })
 
@@ -46,8 +36,8 @@ local OnTooltipSetItem = function(frame, ...)
 	local val = values[link]
 	local meanval = ns.de_means[link]
 
-	if val ~= false and ns.de_probs[link] and results[link] then
-		frame:AddDoubleLine("Disenchant ("..ns.de_probs[link].."):", results[link])
+	if val ~= false and ns.de_probs[link] and ns.de_results[link] then
+		frame:AddDoubleLine("Disenchant ("..ns.de_probs[link].."):", ns.de_results[link])
 	end
 
 	if val then
