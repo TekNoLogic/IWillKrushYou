@@ -3,18 +3,6 @@ local myname, ns = ...
 local GetItemInfo = GetItemInfo
 
 
-local function GS(cash)
-	if not cash then return end
-	if cash > 999999 then return "|cffffd700".. floor(cash/10000) end
-
-	cash = cash/100
-	local s = floor(cash%100)
-	local g = floor(cash/100)
-	if g > 0 then return string.format("|cffffd700%d.|cffc7c7cf%02d", g, s)
-	else return string.format("|cffc7c7cf%d", s) end
-end
-
-
 local results, probs, means = {}, {}, {}
 local values = setmetatable({}, {
 	__index = function(t, link)
@@ -39,7 +27,7 @@ local values = setmetatable({}, {
 			local val1 = qty1 * weight1 * bo1
 			local val2 = bo2 and qty2 * weight2 * bo2 or 0
 			local val3 = bo3 and qty3 * weight3 * bo3 or 0
-			means[link] = GS(val1 + val2 + val3)
+			means[link] = ns.GS(val1 + val2 + val3)
 		end
 
 		-- We need to flip for low level weapons, so we get the common item
@@ -52,7 +40,7 @@ local values = setmetatable({}, {
 		probs[link] = perctxt1
 
 		if bo1 then
-			local val = GS(qty1*bo1)
+			local val = ns.GS(qty1*bo1)
 			t[link] = val
 			return val
 		end
@@ -85,7 +73,7 @@ local OnTooltipSetItem = function(frame, ...)
 
 	if link and link:match("item:34057") then
 		local val = GetAuctionBuyout(34054) * 9 * .45 + GetAuctionBuyout(34055) * 3.5 * .55
-		frame:AddDoubleLine("Shatter Value:", GS(val))
+		frame:AddDoubleLine("Shatter Value:", ns.GS(val))
 	end
 
 	if origs[frame] then return origs[frame](frame, ...) end
