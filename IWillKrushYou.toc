@@ -26,6 +26,7 @@ DraenorFish.lua
 
 calculators\bop_reagents.lua
 calculators\disenchanting\mean.lua
+calculators\disenchanting\mode.lua
 calculators\disenchanting\probablity.lua
 calculators\disenchanting\results.lua
 calculators\draenor_fish.lua

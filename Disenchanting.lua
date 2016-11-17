@@ -1,39 +1,17 @@
 ﻿
 local myname, ns = ...
-local GetItemInfo = GetItemInfo
-
-
-local values = setmetatable({}, {
-	__index = function(t, link)
-		if not link or not GetItemInfo(link) then return end
-
-		if not ns.DEable(link) then
-			t[link] = false
-			return
-		end
-
-		local id, _, _, qty = ns.GetPossibleDisenchants(link)
-
-		local bo1 = id and GetAuctionBuyout(id)
-		if not bo1 then return end
-
-		local val = ns.GS(qty*bo1)
-		t[link] = val
-		return val
-	end,
-})
 
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("AUCTION_ITEM_LIST_UPDATE")
-f:SetScript("OnEvent", function() for i in pairs(values) do values[i] = nil end end)
+f:SetScript("OnEvent", function() for i in pairs(ns.de_values) do ns.de_values[i] = nil end end)
 
 local origs = {}
 local OnTooltipSetItem = function(frame, ...)
 	assert(frame, "arg 1 is nil, someone isn't hooking correctly")
 
 	local _, link = frame:GetItem()
-	local val = values[link]
+	local val = ns.de_values[link]
 	local meanval = ns.de_means[link]
 
 	if val ~= false and ns.de_probs[link] and ns.de_results[link] then
