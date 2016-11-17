@@ -6,11 +6,9 @@ local GetItemInfo = GetItemInfo
 local results, probs, means = {}, {}, {}
 local values = setmetatable({}, {
 	__index = function(t, link)
-		if not link then return end
+		if not link or not GetItemInfo(link) then return end
 
-		local name, _, qual, itemLevel, _, itemType, itemSubType, _, _, texture = GetItemInfo(link)
-
-		if not name or not ns.DEable(link) then
+		if not ns.DEable(link) then
 			t[link] = false
 			return
 		end
