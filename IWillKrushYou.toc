@@ -21,7 +21,6 @@ services\precache.lua
 services\wipe_truthy.lua
 
 Milling.lua
-DraenorFish.lua
 
 calculators\bop_reagents.lua
 calculators\disenchanting\mean.lua
