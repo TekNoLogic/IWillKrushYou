@@ -30,3 +30,7 @@ calculators\gems\wrath.lua
 calculators\gems\cat.lua
 calculators\gems\panda.lua
 calculators\gems\legion.lua
+
+tooltips\base.lua
+tooltips\bop.lua
+tooltips\gems.lua
