@@ -3,7 +3,7 @@ local myname, ns = ...
 
 
 -- This function handles the heavy lifting via recursion
-local function CalculateMean(id, _, _, qty, weight, ...)
+local function CalculateMean(id, _, _, qty, weight, next_id, ...)
 	if not id then return end
 
 	-- If we don't get a buyout price, we should return nil to end the calc
@@ -13,12 +13,11 @@ local function CalculateMean(id, _, _, qty, weight, ...)
 	local weighted_price = price * qty * weight
 
 	-- If there are no more args then we can return our price
-	local next_id = ...
 	if not next_id then return weighted_price end
 
 	-- If we have more args, but they return back nil, then we don't have a
 	-- complete price and we should return nil
-	local remainder = CalculateMean(...)
+	local remainder = CalculateMean(next_id, ...)
 	if not remainder then return end
 
 	-- Everything went great, add our price to the rest and return that
