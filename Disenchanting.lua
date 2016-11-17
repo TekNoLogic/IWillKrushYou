@@ -3,7 +3,7 @@ local myname, ns = ...
 local GetItemInfo = GetItemInfo
 
 
-local results, probs, means = {}, {}, {}
+local results = {}
 local values = setmetatable({}, {
 	__index = function(t, link)
 		if not link or not GetItemInfo(link) then return end
@@ -24,7 +24,6 @@ local values = setmetatable({}, {
 		assert(select(2, GetItemInfo(id1)), "No link found for id ".. id1.. " on item "..link)
 		assert(qtytxt1, "No qtytext found for ".. link)
 		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
-		probs[link] = perctxt1
 
 		if bo1 then
 			local val = ns.GS(qty1*bo1)
@@ -47,8 +46,8 @@ local OnTooltipSetItem = function(frame, ...)
 	local val = values[link]
 	local meanval = ns.de_means[link]
 
-	if val ~= false and probs[link] and results[link] then
-		frame:AddDoubleLine("Disenchant ("..probs[link].."):", results[link])
+	if val ~= false and ns.de_probs[link] and results[link] then
+		frame:AddDoubleLine("Disenchant ("..ns.de_probs[link].."):", results[link])
 	end
 
 	if val then
