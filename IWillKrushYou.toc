@@ -18,12 +18,14 @@ externals\memoizing_table.lua
 externals\disenchant_probability.lua
 
 services\precache.lua
+services\wipe_truthy.lua
 
 Milling.lua
 Disenchanting.lua
 DraenorFish.lua
 
 calculators\bop_reagents.lua
+calculators\draenor_fish.lua
 calculators\gems\price.lua
 calculators\gems\bc.lua
 calculators\gems\wrath.lua
@@ -33,4 +35,5 @@ calculators\gems\legion.lua
 
 tooltips\base.lua
 tooltips\bop.lua
+tooltips\draenor_fish.lua
 tooltips\gems.lua

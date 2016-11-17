@@ -79,16 +79,9 @@ ns.bop_items = ns.NewMemoizingTable(function(id)
 end)
 
 
-local function Wipe(t)
-  for i,v in pairs(t) do
-    if v ~= false then t[i] = nil end
-  end
-end
-
-
 local function OnAuctionItemListUpdate()
-	Wipe(ns.bop_values)
-	Wipe(ns.bop_items)
+	ns.Wipe(ns.bop_values)
+	ns.Wipe(ns.bop_items)
 end
 
 

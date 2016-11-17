@@ -59,41 +59,12 @@ local function GetFilletedPrice(id)
 end
 
 
-local values = setmetatable({}, {
-	__index = function(t, link)
-		local id = ns.ids[link]
-		if not id then
-			t[link] = false
-			return false
-		end
-
-		local v = GetFilletedPrice(id)
-		t[link] = v
-		return v
-	end
-})
+ns.draenor_fish = ns.NewMemoizingTable(GetFilletedPrice)
 
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("AUCTION_ITEM_LIST_UPDATE")
-f:SetScript("OnEvent", function() wipe(values) end)
-
-
-local origs = {}
-local OnTooltipSetItem = function(frame, ...)
-	assert(frame, "arg 1 is nil, someone isn't hooking correctly")
-
-	local _, link = frame:GetItem()
-	local val = values[link]
-
-	if val then
-		frame:AddDoubleLine("Fillet value:", val)
-	end
-
-	if origs[frame] then return origs[frame](frame, ...) end
+local function OnAuctionItemListUpdate()
+	ns.Wipe(ns.draenor_fish)
 end
 
-for i,frame in pairs{GameTooltip, ItemRefTooltip} do
-	origs[frame] = frame:GetScript("OnTooltipSetItem")
-	frame:SetScript("OnTooltipSetItem", OnTooltipSetItem)
-end
+
+ns.RegisterCallback("AUCTION_ITEM_LIST_UPDATE", OnAuctionItemListUpdate)
