@@ -21,7 +21,6 @@ services\precache.lua
 services\wipe_truthy.lua
 
 Milling.lua
-Disenchanting.lua
 DraenorFish.lua
 
 calculators\bop_reagents.lua
@@ -39,5 +38,6 @@ calculators\gems\legion.lua
 
 tooltips\base.lua
 tooltips\bop.lua
+tooltips\disenchanting.lua
 tooltips\draenor_fish.lua
 tooltips\gems.lua
