@@ -38,3 +38,11 @@ end
 
 
 ns.de_means = ns.NewMemoizingTable(GetDEMeanValue)
+
+
+local function OnAuctionItemListUpdate()
+	ns.Wipe(ns.de_means)
+end
+
+
+ns.RegisterCallback("AUCTION_ITEM_LIST_UPDATE", OnAuctionItemListUpdate)

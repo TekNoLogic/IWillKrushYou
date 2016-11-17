@@ -17,3 +17,11 @@ end
 
 
 ns.de_values = ns.NewMemoizingTable(GetDECommonResult)
+
+
+local function OnAuctionItemListUpdate()
+	ns.Wipe(ns.de_values)
+end
+
+
+ns.RegisterCallback("AUCTION_ITEM_LIST_UPDATE", OnAuctionItemListUpdate)

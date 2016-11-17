@@ -2,10 +2,6 @@
 local myname, ns = ...
 
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("AUCTION_ITEM_LIST_UPDATE")
-f:SetScript("OnEvent", function() for i in pairs(ns.de_values) do ns.de_values[i] = nil end end)
-
 local origs = {}
 local OnTooltipSetItem = function(frame, ...)
 	assert(frame, "arg 1 is nil, someone isn't hooking correctly")
