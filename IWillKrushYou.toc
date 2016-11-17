@@ -25,6 +25,7 @@ Disenchanting.lua
 DraenorFish.lua
 
 calculators\bop_reagents.lua
+calculators\disenchanting\mean.lua
 calculators\draenor_fish.lua
 calculators\gems\price.lua
 calculators\gems\bc.lua

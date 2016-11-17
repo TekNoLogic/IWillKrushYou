@@ -21,13 +21,6 @@ local values = setmetatable({}, {
 		local bo2 = id2 and GetAuctionBuyout(id2)
 		local bo3 = id3 and GetAuctionBuyout(id3)
 
-		if bo1 and (bo2 or not id2) and (bo3 or not id3) then
-			local val1 = qty1 * weight1 * bo1
-			local val2 = bo2 and qty2 * weight2 * bo2 or 0
-			local val3 = bo3 and qty3 * weight3 * bo3 or 0
-			means[link] = ns.GS(val1 + val2 + val3)
-		end
-
 		assert(select(2, GetItemInfo(id1)), "No link found for id ".. id1.. " on item "..link)
 		assert(qtytxt1, "No qtytext found for ".. link)
 		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
@@ -52,7 +45,7 @@ local OnTooltipSetItem = function(frame, ...)
 
 	local _, link = frame:GetItem()
 	local val = values[link]
-	local meanval = means[link]
+	local meanval = ns.de_means[link]
 
 	if val ~= false and probs[link] and results[link] then
 		frame:AddDoubleLine("Disenchant ("..probs[link].."):", results[link])
