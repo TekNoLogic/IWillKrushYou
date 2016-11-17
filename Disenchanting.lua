@@ -13,8 +13,8 @@ local values = setmetatable({}, {
 			return
 		end
 
-		local id1, qtytxt1, perctxt1, qty1, weight1, id2, qtytxt2, perctxt2, qty2,
-			weight2, id3, _, _, qty3, weight3 = ns.GetPossibleDisenchants(link)
+		local id1, qtytxt1, perctxt1, qty1, weight1, id2, _, _, qty2, weight2,
+			id3, _, _, qty3, weight3 = ns.GetPossibleDisenchants(link)
 		if not id1 then return end
 
 		local bo1 = GetAuctionBuyout(id1)
