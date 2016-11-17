@@ -28,8 +28,8 @@ local values = setmetatable({}, {
 			means[link] = ns.GS(val1 + val2 + val3)
 		end
 
-		assert(qtytxt1, "No qtytext found for ".. link)
 		assert(select(2, GetItemInfo(id1)), "No link found for id ".. id1.. " on item "..link)
+		assert(qtytxt1, "No qtytext found for ".. link)
 		results[link] = qtytxt1.." "..select(2, GetItemInfo(id1))
 		probs[link] = perctxt1
 
