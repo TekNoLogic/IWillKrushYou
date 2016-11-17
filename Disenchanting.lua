@@ -47,11 +47,6 @@ local OnTooltipSetItem = function(frame, ...)
 		end
 	end
 
-	if link and link:match("item:34057") then
-		local val = GetAuctionBuyout(34054) * 9 * .45 + GetAuctionBuyout(34055) * 3.5 * .55
-		frame:AddDoubleLine("Shatter Value:", ns.GS(val))
-	end
-
 	if origs[frame] then return origs[frame](frame, ...) end
 end
 
