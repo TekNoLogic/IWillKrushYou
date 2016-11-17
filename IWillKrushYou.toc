@@ -23,12 +23,10 @@ Milling.lua
 Disenchanting.lua
 DraenorFish.lua
 
-bop_reagents.lua
-
-gems\price.lua
-gems\tooltip.lua
-gems\bc.lua
-gems\wrath.lua
-gems\cat.lua
-gems\panda.lua
-gems\legion.lua
+calculators\bop_reagents.lua
+calculators\gems\price.lua
+calculators\gems\bc.lua
+calculators\gems\wrath.lua
+calculators\gems\cat.lua
+calculators\gems\panda.lua
+calculators\gems\legion.lua

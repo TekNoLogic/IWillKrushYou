@@ -79,32 +79,17 @@ ns.bop_items = ns.NewMemoizingTable(function(id)
 end)
 
 
-local wiper = CreateFrame("Frame")
-frame:RegisterEvent("AUCTION_ITEM_LIST_UPDATE")
-wiper:SetScript("OnEvent", function()
-	wipe(ns.bop_values)
-	wipe(ns.bop_items)
-end)
-
-
-local origs = {}
-local function OnTooltipSetItem(frame, ...)
-	local name, link = frame:GetItem()
-	local id = link and ns.ids[link]
-	if id then
-    if ns.bop_items[id] then
-      local name = GetItemInfo(ns.bop_items[id])
-      frame:AddDoubleLine("Best trade-in:", name or "<unknown>", nil,nil,nil, 1,1,1)
-    end
-		if ns.bop_values[id] then
-			frame:AddDoubleLine("Trade-in value:", ns.GS(ns.bop_values[id]))
-		end
-	end
-	if origs[frame] then return origs[frame](frame, ...) end
+local function Wipe(t)
+  for i,v in pairs(t) do
+    if v ~= false then t[i] = nil end
+  end
 end
 
 
-for _,frame in pairs{GameTooltip, ItemRefTooltip} do
-	origs[frame] = frame:GetScript("OnTooltipSetItem")
-	frame:SetScript("OnTooltipSetItem", OnTooltipSetItem)
+local function OnAuctionItemListUpdate()
+	Wipe(ns.bop_values)
+	Wipe(ns.bop_items)
 end
+
+
+ns.RegisterCallback("AUCTION_ITEM_LIST_UPDATE", OnAuctionItemListUpdate)
